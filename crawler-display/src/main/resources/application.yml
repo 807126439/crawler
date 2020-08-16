@@ -1,0 +1,70 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /szzjly
+
+spring:
+  application:
+    name: crawler-display
+  profiles:
+    active: dev
+  freemarker:
+    template-loader-path: classpath:/static/ftl/
+    request-context-attribute: request
+
+#  resources:
+#    static-locations: classpath:/webapp/
+
+mybatis:
+  mapper-locations: classpath*:com/zxh/crawlerdisplay/web/**/dao/*.xml
+  type-aliases-package: com.zxh.crawlerdisplay.web.system.dto.authority,com.zxh.crawlerdisplay.core.common.bean,com.zxh.crawlerdisplay.web.system.dto.user,com.zxh.crawlerdisplay.web.system.entity
+
+dubbo:
+  application:
+    name: crawler-display
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  scan:
+    base-packages: com.zxh.crawlerdisplay.dubbo.service
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/crawler?serverTimezone=UTC
+    data-username: root
+    data-password: root
+    #driver-class-name: com.mysql.jdbc.Driver
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 下面为连接池的补充设置，应用到上面所有数据源中
+    druid:
+      username: root
+      password: root
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall
+      filter:
+        stat:
+          log-slow-sql: true
+      stat-view-servlet:
+        login-username: admin
+        login-password: 123456
+        url-pattern: "/druid/*"
+      web-stat-filter:
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+logging:
+  level:
+    com.zxh: debug
+    org.springframework.web: DEBUG # 配置spring web日志级别

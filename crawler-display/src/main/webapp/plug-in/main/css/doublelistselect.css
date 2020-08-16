@@ -1,0 +1,41 @@
+.myoverlay{position: relative;width: 860px;margin: auto;}
+.myoverlay .hd{background-color: #51CF86;line-height:26px;height:26px;overflow: hidden;padding: 0 12px;color: #FFF;font-size:14px;}
+.myoverlay .bd{padding:10px;}
+
+
+.setting{float:left;padding:10px;}
+.setting label{}
+.setting input{}
+.setting .input-text{vertical-align: bottom;}
+.setting #note{height: 160px;}
+.setting #name{width: 240px;}
+.setting .openlistwrap{float:right;}
+.setting .btns{text-align: center;}
+.setting #sure,.setting #close{display: inline-block;line-height:25px;color:#FFF;background-color:#51CF86;font-size:16px;padding: 0 10px;text-decoration: none;border-radius: 4px;}
+.setting #close{background-color:#CCC;margin-left:8px;}
+
+.doublelist{float:left;padding:10px;width: 500px;border: 1px solid #EEE;}
+.doublelist-inner{  margin-right: 30px; position: relative;}
+
+.leftbox{width:50%;float: left;}
+.filtergroup{margin-top:8px;}
+.filtergroup label{float: left;display: inline-block;}
+.filtergroup>div{margin-left:50px;}
+#listgroup,#selectedlist{height: 290px;border: 1px solid #CCC;margin-top:8px;font-size: 12px;padding:5px;overflow: auto;}
+#listgroup li.disabled-group,#selectedlist li.disabled-group,
+#listgroup li.disabled-notkey,#selectedlist li.disabled-notkey,
+#listgroup li.disabled-item,#selectedlist li.disabled-item{display: none;}
+#listgroup li>a,#selectedlist li>a{padding-left: 6px;text-decoration: none;display: block;}
+#listgroup li>a:hover,#selectedlist li>a:hover{background-color: #F3F3F3;text-decoration: none;color: #0FBB58;}
+#listgroup li.selected>a,#selectedlist li.selected>a{background-color: #39B96F;text-decoration: none;color: #FFF;border-radius:2px;}
+#listgroup li>div{font-weight: bold;}
+
+.rightbox{width:50%;float: right;margin-right: -30px}
+.rightbox>.tt{text-align: center;font-size:14px;}
+.rightbox>.tt strong{font-weight: normal;color: #BD0D0D;margin: 0 3px;}
+.rightbox>.tt>span:first-child{color:#233CCA;}
+#selectedlist{height:300px;margin-top:4px;}
+
+.selectcontrl{width:24px;position: absolute;top: 50%;left: 50%;margin-left:3px;margin-top:-36px;}
+.selectcontrl a{display: block;line-height:20px;font-size: 14px;background-color: #CCC;text-decoration: none;text-align: center;margin: 5px 0;color: #666;border: 1px solid #999;border-radius: 3px;}
+.selectcontrl a:hover{background-color: #39B96F;color: #FFF;border: 1px solid #13A550;}

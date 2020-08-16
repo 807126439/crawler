@@ -1,0 +1,60 @@
+@CHARSET "UTF-8";
+
+/*可选通讯录*/
+.addressbook{position:absolute;right: 10px;top: 10px;bottom: 10px;width: 250px;padding-top:85px;padding-bottom: 10px;}
+.addressbook-header{background: #399fe4;color: #fff;position: absolute;top: 0;left: 0;right: 0;border-radius:5px 5px 0 0;line-height: 40px;height: 40px;}
+.addressbook-header-title{padding-left: 10px;font-size:16px;float: left;}
+.addressbook-header-right{float: right;padding-right: 10px;}
+.addressbook-header-right a{color: #ffeb3b}
+.addressbook-search{position: absolute;top: 40px;left: 0;right: 0;height: 40px;background: #ffffff;padding-bottom: 5px;}
+.addressbook-search input{border:none;line-height: 40;height: 40px;width: 100%;display: block;background: transparent;box-sizing:border-box;padding: 0 8px; }
+.addressbook-search  .addressbook-search-icon+input{padding-left: 40px;}
+.addressbook-search-icon{position: absolute;width: 24px;height: 24px;top:8px;left: 8px;background: url(../images/icons.png) no-repeat -226px -1px}
+.addressbook-search:after{content: '';display: block;position: absolute;bottom:5px;left: 20px;right: 20px;border-bottom: 1px solid #ddd}
+.addressbook-content{min-height:240px;padding:0 5px;max-height: 100%;overflow: auto;background: #fff;position: relative;}
+.addressbook:after{content: '';display: block;height: 10px;left: 0;right: 0;border-radius: 0 0 10px 10px;background: #fff}
+
+#addressbookTree * {font-family: "Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,tahoma,arial,"WenQuanYi Micro Hei",Verdana,sans-serif,"\5B8B\4F53";}
+#addressbookTree li{white-space:normal;}
+#addressbookTree li>a,#addressbookTree li>a span{color:#333;height:auto;line-height:22px;padding:0;}
+#addressbookTree li>a{display: block;padding:2px 0 2px 5px;}
+#addressbookTree li>.chk+a{padding-left:18px;}
+#addressbookTree li>a:last-child,#addressbookTree li>a:last-child span,#addressbookTree li.not-parent>a,#addressbookTree li.not-parent>a span{color:#009688;}
+#addressbookTree li>a:last-child:hover{background-color: #f0f0f0;}
+#addressbookTree li a:hover{text-decoration: none}
+#addressbookTree li>a:active,#addressbookTree li>a:last-child:active{background-color:#E6E6E6;}
+#addressbookTree li a.curSelectedNode{background-color:transparent;border:0;opacity:1;}
+#addressbookTree li a.curSelectedNode span{}
+#addressbookTree li .switch{float:right;height:26px;}
+#addressbookTree li .switch{background: url(../images/icons.png) no-repeat;}
+#addressbookTree li .switch.noline_open{background-position:-420px 10px }
+#addressbookTree li .switch.noline_close{background-position:-434px 8px ;}
+#addressbookTree li .switch.noline_docu{background:none;}
+#addressbookTree li .chk{float:left;margin-top: 6px;background-repeat: no-repeat;background-image: url(../images/icons.png);cursor: pointer;}
+#addressbookTree li .chk.checkbox_false_full{background-position: -376px 1px;}
+#addressbookTree li .chk.checkbox_false_full_focus {background-position:-406px 1px;}
+#addressbookTree li .chk.checkbox_true_full,#addressbookTree li .checkbox_true_full_focus {background-position: -391px 1px}
+#addressbookTree li .chk.checkbox_true_part,#addressbookTree li .chk.checkbox_true_part_focus {background-position: -406px 1px}
+#addressbookTree li>a span{vertical-align: top;font-size: 12px}
+#addressbookTree li>a span.ext{color: #888}
+#addressbookTree li.hide{display: none;}
+
+
+/*收件人列表*/
+.recipientslist{border: 1px solid #DDD;overflow: auto;min-height:34px; max-height: 220px;}
+.recipientslist li{float: left;display: inline-block;line-height: 26px;min-width:78px;padding:0 5px; margin:5px 2px;text-align: center;box-shadow:1px 1px 4px rgba(0,0,0,.2);cursor: pointer;background-color:#399fe4;color:#FFF;font-size:13px;border-radius:4px;position: relative;}
+.recipientslist li:hover{background-color: #2689cc;}
+.recipientslist li.tip{background: #eee;color: #666;}
+.recipientslist li:hover:after {
+    content: "\00D7";
+    font-size: 20px;
+    line-height: 16px;
+    display: inline-block;
+    vertical-align: top;
+    height: 16px;
+    width: 16px;
+    margin-left: 4px;
+    margin-top: 5px;
+    color: #fff;}
+
+.recipientslist li.tip:hover:after{content:none;}

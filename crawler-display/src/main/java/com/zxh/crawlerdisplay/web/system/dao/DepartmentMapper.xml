@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxh.crawlerdisplay.web.system.dao.IDepartmentDao">
+
+  <resultMap id="BaseResultMap" type="com.zxh.crawlerdisplay.web.system.entity.Department">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="sort" jdbcType="BIGINT" property="sort" />
+    <result column="depart_no" jdbcType="VARCHAR" property="departNo" />
+    <result column="depart_name" jdbcType="VARCHAR" property="departName" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="flag" jdbcType="SMALLINT" property="flag" />
+    <result column="unit_id" jdbcType="VARCHAR" property="unitId" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, sort, depart_no, depart_name, note, level, status, flag, unit_id, gmt_create, 
+    gmt_modified
+  </sql>
+
+  <select id="getById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from c_department
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="countByCondition" parameterType="map" resultType="long">
+    SELECT COUNT(*) FROM c_department d 
+    <include refid="select_condition" />
+  </select>
+
+  <sql id="select_condition">
+    <where>
+      <if test="id!=null">
+        d.id=#{id}
+      </if>
+      <if test="sort!=null">
+        AND d.sort=#{sort}
+      </if>
+      <if test="departNo!=null">
+        AND d.depart_no=#{departNo}
+      </if>
+      <if test="departName!=null">
+        AND d.depart_name like #{departName}
+      </if>
+      <if test="note!=null">
+        AND d.note=#{note}
+      </if>
+      <if test="level!=null">
+        AND d.level=#{level}
+      </if>
+      <if test="status!=null">
+        AND d.status=#{status}
+      </if>
+      <if test="flag!=null">
+        AND d.flag=#{flag}
+      </if>
+      <if test="unitId!=null">
+        AND d.unit_id=#{unitId}
+      </if>
+      <if test="gmtCreate!=null">
+        AND d.gmt_create=#{gmtCreate}
+      </if>
+      <if test="gmtModified!=null">
+        AND d.gmt_modified=#{gmtModified}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectListByCondition" parameterType="map" resultType="com.zxh.crawlerdisplay.web.system.dto.department.DepartmentDTO">
+    select 
+      d.id AS id,
+      d.sort AS sort,
+      d.depart_no AS departNo,
+      d.depart_name AS departName,
+      d.note AS note,
+      d.level AS level,
+      d.status AS status,
+      d.flag AS flag,
+      d.unit_id AS unitId,
+      d.gmt_create AS gmtCreate,
+      d.gmt_modified AS gmtModified,
+      u.unit_name as unitName
+    from c_department d left join c_unit u on d.unit_id = u.id
+    <include refid="select_condition" />
+    <if test="sidx!=null and sord!=null">
+      ORDER BY ${sidx} ${sord}
+    </if>
+    <if test="startQuery!=null and pageSize!=null">
+      LIMIT #{startQuery},#{pageSize}  
+    </if>
+  </select>
+
+  <select id="getDetailById" parameterType="java.lang.String" resultType="com.zxh.crawlerdisplay.web.system.dto.department.DepartmentDTO">
+    SELECT 
+      d.id AS id,
+      d.sort AS sort,
+      d.depart_no AS departNo,
+      d.depart_name AS departName,
+      d.note AS note,
+      d.level AS level,
+      d.status AS status,
+      d.flag AS flag,
+      d.unit_id AS unitId,
+      d.gmt_create AS gmtCreate,
+      d.gmt_modified AS gmtModified,
+      u.unit_name as unitName
+    FROM c_department d left join c_unit u on d.unit_id = u.id
+
+    WHERE d.id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String">
+    delete from c_department
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.zxh.crawlerdisplay.web.system.entity.Department">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT REPLACE(UUID(),'-','')
+    </selectKey>
+    insert into c_department (id, sort, depart_no, 
+      depart_name, note, level, 
+      status, flag, unit_id, 
+      gmt_create, gmt_modified)
+    values (#{id,jdbcType=VARCHAR}, #{sort,jdbcType=BIGINT}, #{departNo,jdbcType=VARCHAR}, 
+      #{departName,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, 
+      #{status,jdbcType=SMALLINT}, #{flag,jdbcType=SMALLINT}, #{unitId,jdbcType=VARCHAR}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.zxh.crawlerdisplay.web.system.entity.Department">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT REPLACE(UUID(),'-','')
+    </selectKey>
+    insert into c_department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="departNo != null">
+        depart_no,
+      </if>
+      <if test="departName != null">
+        depart_name,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="unitId != null">
+        unit_id,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=VARCHAR},
+      <if test="sort != null">
+        #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="departNo != null">
+        #{departNo,jdbcType=VARCHAR},
+      </if>
+      <if test="departName != null">
+        #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=SMALLINT},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.zxh.crawlerdisplay.web.system.entity.Department">
+    update c_department
+    <set>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="departNo != null">
+        depart_no = #{departNo,jdbcType=VARCHAR},
+      </if>
+      <if test="departName != null">
+        depart_name = #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=SMALLINT},
+      </if>
+      <if test="unitId != null">
+        unit_id = #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="update" parameterType="com.zxh.crawlerdisplay.web.system.entity.Department">
+    update c_department
+    set sort = #{sort,jdbcType=BIGINT},
+      depart_no = #{departNo,jdbcType=VARCHAR},
+      depart_name = #{departName,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      status = #{status,jdbcType=SMALLINT},
+      flag = #{flag,jdbcType=SMALLINT},
+      unit_id = #{unitId,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

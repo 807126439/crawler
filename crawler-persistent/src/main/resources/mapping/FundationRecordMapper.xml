@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zxh.crawlerpersistent.dao.FundationRecordDao">
+    <resultMap id="BaseResultMap" type="com.zxh.crawlerpersistent.model.FundationRecord">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="code" property="code" jdbcType="INTEGER"/>
+        <result column="date" property="date" jdbcType="TIMESTAMP"/>
+        <result column="net_value" property="netValue" jdbcType="REAL"/>
+        <result column="accumulated_net" property="accumulatedNet" jdbcType="REAL"/>
+        <result column="growth_rate" property="growthRate" jdbcType="REAL"/>
+        <result column="buy_status" property="buyStatus" jdbcType="TINYINT"/>
+        <result column="sell_status" property="sellStatus" jdbcType="TINYINT"/>
+        <result column="distribution" property="distribution" jdbcType="REAL"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.zxh.crawlerpersistent.model.FundationRecord">
+    insert into fundation_record (id, code, date, 
+      net_value, accumulated_net, growth_rate, 
+      buy_status, sell_status, distribution
+      )
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, 
+      #{netValue,jdbcType=REAL}, #{accumulatedNet,jdbcType=REAL}, #{growthRate,jdbcType=REAL}, 
+      #{buyStatus,jdbcType=TINYINT}, #{sellStatus,jdbcType=TINYINT}, #{distribution,jdbcType=REAL}
+      )
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.zxh.crawlerpersistent.model.FundationRecord">
+        insert into fundation_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="date != null">
+                date,
+            </if>
+            <if test="netValue != null">
+                net_value,
+            </if>
+            <if test="accumulatedNet != null">
+                accumulated_net,
+            </if>
+            <if test="growthRate != null">
+                growth_rate,
+            </if>
+            <if test="buyStatus != null">
+                buy_status,
+            </if>
+            <if test="sellStatus != null">
+                sell_status,
+            </if>
+            <if test="distribution != null">
+                distribution,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=INTEGER},
+            </if>
+            <if test="date != null">
+                #{date,jdbcType=TIMESTAMP},
+            </if>
+            <if test="netValue != null">
+                #{netValue,jdbcType=REAL},
+            </if>
+            <if test="accumulatedNet != null">
+                #{accumulatedNet,jdbcType=REAL},
+            </if>
+            <if test="growthRate != null">
+                #{growthRate,jdbcType=REAL},
+            </if>
+            <if test="buyStatus != null">
+                #{buyStatus,jdbcType=TINYINT},
+            </if>
+            <if test="sellStatus != null">
+                #{sellStatus,jdbcType=TINYINT},
+            </if>
+            <if test="distribution != null">
+                #{distribution,jdbcType=REAL},
+            </if>
+        </trim>
+    </insert>
+</mapper>

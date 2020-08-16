@@ -1,0 +1,82 @@
+.checktree{position:absolute;right: 0;top: 0;bottom: 0;left: 0;font-family: "Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,tahoma,arial,"WenQuanYi Micro Hei",Verdana,sans-serif,"\5B8B\4F53";}
+.checktree-header{position: absolute;top: 0;left: 0;right: 0;background: #f1f4f7;line-height: 30px;height: 30px;padding: 0 10px;}
+.checktree-header-title{font-size:16px;float: left;}
+.checktree-header-right{float: right;}
+.checktree #sure{display: inline-block;line-height: 26px;padding: 0 12px;color: #fff;background: #009688;border-radius:3px;font-size: 13px;text-decoration: none;}
+.checktree-header a{color: #333}
+.checktree-search{position: absolute;top:30px;left: 0;right: 0;height: 40px;background: #ffffff;padding-bottom: 5px;}
+.checktree-search input{border:none;line-height: 40;height: 40px;width: 100%;display: block;background: transparent;box-sizing:border-box;padding: 0 8px; }
+.checktree-search  .checktree-search-icon+input{padding-left: 40px;}
+.checktree-search-icon{position: absolute;width: 24px;height: 24px;top:8px;left: 8px;background: url(../images/icons_checktree.png) no-repeat -40px 5px}
+.checktree-search:after{content: '';display: block;position: absolute;bottom:5px;left: 20px;right: 20px;border-bottom: 1px solid #ddd}
+.checktree-content{padding:0 15px;overflow: auto;background: #fff;position: absolute;top: 30px;bottom: 0;left: 0;right: 0;}
+.checktree-search+.checktree-content{top:80px}
+.checktree:after{content: '';display: block;height: 10px;left: 0;right: 0;border-radius: 0 0 10px 10px;background: #fff}
+
+#checktreeTree li{white-space:normal;margin:2px 0}
+#checktreeTree li>a,#checktreeTree li>a span{color:#111;height:auto;line-height:22px;padding:0;}
+#checktreeTree li>a{display: block;padding:2px 5px 2px 5px;}
+/*#checktreeTree li.is-parent>a,#checktreeTree li.is-parent>a.curSelectedNode{ background: #e7f1f9; border: 1px solid #c1d9ec;}*/
+#checktreeTree li>.chk+a{padding-left:27px;}
+#checktreeTree li.not-parent>a span{color:#0f4d89;}
+#checktreeTree li.not-parent>a:hover{background-color: #f0f0f0;}
+#checktreeTree li a:hover{text-decoration: none}
+#checktreeTree li>a:active,#checktreeTree li.not-parent>a:active{background-color:#E6E6E6;}
+#checktreeTree li a.curSelectedNode{background-color:transparent;border:0;opacity:1;}
+#checktreeTree li a.curSelectedNode span{}
+#checktreeTree span{margin-right: 2px;}
+#checktreeTree span.button{ line-height: 0;  margin: 0;  width: 16px;  height: 16px;  display: inline-block;  vertical-align: middle;cursor: pointer;  outline: none;}
+#checktreeTree li .switch{float:right;height:26px;margin-right:5px;}
+#checktreeTree li .switch{background: url(../images/icons_checktree.png) no-repeat}
+#checktreeTree li .switch.noline_open{background-position:-12px 8px }
+#checktreeTree li .switch.noline_close{background-position:-25px 6px ;}
+#checktreeTree li .switch.noline_docu{background:none;}
+#checktreeTree li .chk{width: 13px; height: 13px; margin: 6px 3px 0 5px; float:left;cursor: pointer;border: 1px solid #2e8deb;position: relative;}
+#checktreeTree li .chk.checkbox_false_full_focus,#checktreeTree li .chk.radio_false_full_focus {border-color: #1091e7}
+#checktreeTree li .chk.checkbox_true_full,#checktreeTree li .checkbox_true_full_focus,#checktreeTree li .chk.radio_true_full,#checktreeTree li .radio_true_full_focus {background: url(../images/icons_checktree.png) no-repeat 1px 1px}
+#checktreeTree li .chk.checkbox_true_part:before,#checktreeTree li .chk.checkbox_true_part_focus:before,#checktreeTree li .chk.checkbox_false_part:before,#checktreeTree li .chk.checkbox_false_part_focus:before,#checktreeTree li .chk.radio_false_part:before,#checktreeTree li .chk.radio_false_part_focus:before,#checktreeTree li .chk.radio_true_part:before,#checktreeTree li .chk.radio_true_part_focus:before{content: '';display: block;position: absolute;width: 7px;height: 7px;left: 3px;top: 3px;background: #3f96ec}
+#checktreeTree li .chk.radio_false_part:before,#checktreeTree li .chk.radio_false_part_focus:before,#checktreeTree li .chk.radio_true_part:before,#checktreeTree li .chk.radio_true_part_focus:before{background: #4e9be8}
+#checktreeTree li .chk.radio_false_full,#checktreeTree li .chk.radio_false_full_focus,#checktreeTree li .chk.radio_true_full,#checktreeTree li .radio_true_full_focus,#checktreeTree li .chk.radio_false_part,#checktreeTree li .chk.radio_true_part,#checktreeTree li .radio_false_part_focus,#checktreeTree li .radio_true_part_focus,#checktreeTree li .chk.radio_false_part:before,#checktreeTree li .chk.radio_false_part_focus:before,#checktreeTree li .chk.radio_true_part:before,#checktreeTree li .chk.radio_true_part_focus:before{border-radius: 50%}
+#checktreeTree li>a span{vertical-align: top;font-size: 13px}
+
+.checktree-tree.ztree li>a span.ext{color: #666}
+.checktree-tree.ztree li.hide{display: none;}
+.checktree-tree.ztree li ul { margin: 0; padding: 0 0 0 18px;}
+.checktree-tree.ztree li ul.show {display: block !important;}
+
+.checktree-skin-doublebox .checktree-tree{position: absolute;top: 0;bottom: 5px;left:15px;right: 50%;overflow: auto;margin-right: 8px;background: #f7f7f7; border: 1px solid #dcdcdc;}
+.checktree-skin-doublebox .checktree-content:before{content: '\20'; position: absolute;top: 0;bottom: 5px;right:15px;left: 50%;overflow: auto;margin-left: 8px;background: #f7f7f7; border: 1px solid #dcdcdc;}
+.checktree-skin-doublebox #checktreeTree li .last-ul{position: fixed;top:75px;bottom: 5px;right:15px; left:50%;overflow: auto;margin-left:8px;padding: 0; border: 1px solid transparent; }
+.checktree-skin-doublebox #checktreeTree li.is-parent>a,.checktree-skin-doublebox #checktreeTree li.is-parent>a.curSelectedNode{ background: none; border:0;}
+.checktree-skin-doublebox #checktreeTree li.is-parent>a:hover,.checktree-skin-doublebox #checktreeTree li.is-parent>a.curSelectedNode:hover{  background-color: #eee;}
+.checktree-skin-doublebox #checktreeTree li.not-parent:hover>a {  background-color: #2c96db;}
+.checktree-skin-doublebox #checktreeTree li.not-parent:hover>a span {color: #fff}
+.checktree-skin-doublebox #checktreeTree li.not-parent:hover>.chk {  background-color: #f6f6f6;}
+.checktree-skin-doublebox #checktreeTree li .switch { }
+.checktree-skin-doublebox #checktreeTree li.open>.switch {display: none;}
+.checktree-skin-doublebox #checktreeTree li.open>a,.checktree-skin-doublebox #checktreeTree li.open>a.curSelectedNode ,.checktree-skin-doublebox #checktreeTree li.open>a:hover,.checktree-skin-doublebox #checktreeTree li.open>a.curSelectedNode:hover{background: #d6e4ed}
+.checktree-skin-doublebox #checktreeTree li.open>.last-ul{}
+.checktree-skin-doublebox #checktreeTree li.open:before {content: '\20';display: block;float: right;
+    width: 16px;height: 26px;margin-right: 5px; vertical-align: middle; cursor: pointer; outline: none; background: url(../images/icons_checktree.png) no-repeat -25px 6px;}
+
+/*原皮肤-字体放大版*/
+#checktreeTree2 *{font-size: 14px;}
+#checktreeTree2 li a{box-sizing:border-box;height: 24px;}
+#checktreeTree2 span.button.switch{padding: 3px 0}
+#checktreeTree2 span.button.bottom_close {  background-position: -74px -33px;}
+#checktreeTree2 span.button.bottom_open {  background-position: -92px -33px;}
+#checktreeTree2 span.button.center_close {  background-position: -74px -15px;}
+#checktreeTree2 span.button.center_open {  background-position: -92px -15px;}
+#checktreeTree2 span.button.roots_close {  background-position: -74px 3px;}
+#checktreeTree2 span.button.roots_open {  background-position: -92px 3px;}
+#checktreeTree2 li span { line-height: 24px;}
+
+/*已选列表*/
+.checktree-selected-list{position: absolute;bottom: 5px;right: 15px;width:180px ;margin-left: 8px;top:80px;background: #f7f7f7; border: 1px solid #dcdcdc;z-index: 1;}
+.checktree-selected-list+.checktree .checktree-search{right:203px}
+.checktree-selected-list+.checktree .checktree-content{right:203px;margin-right: 8px;margin-bottom: 5px;margin-left: 15px;background: #f7f7f7; border: 1px solid #dcdcdc;}
+.checktree-selected-list__title{position: absolute;bottom: 100%;left: 0;right: 0;text-align: center;font-size: 14px;color: #121e40;line-height: 40px;}
+.checktree-selected-list__content{position: absolute; top: 5px;left: 5px;bottom: 5px;right: 5px;overflow: auto}
+.checktree-selected-list__item{line-height: 1.6;padding: 2px 10px;text-align: left;border: 1px solid #d4d9de;background: #f5faff;color: #333;font-size: 13px;margin: 5px 2px;box-shadow: 1px 1px 2px 0 rgba(0,0,0,.1);}
+.checktree-selected-list__item .close{font-style: normal;color: #fff;font-size: 16px;line-height: 16px;text-align: center; margin:2px 0 0 5px;float: right;background: #b4b8bf;display: inline-block;width: 16px;height: 16px;border: 1px solid #919aad;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;-o-user-select: none;user-select: none;}
+.checktree-selected-list__item .close:hover{background: #7495b7}

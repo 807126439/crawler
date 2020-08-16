@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxh.crawlerdisplay.web.system.dao.ISysWhiteDomainDao">
+
+  <resultMap id="BaseResultMap" type="com.zxh.crawlerdisplay.web.system.entity.SysWhiteDomain">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="sort" jdbcType="BIGINT" property="sort" />
+    <result column="white_address" jdbcType="VARCHAR" property="whiteAddress" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, sort, white_address, status, create_by, update_by, gmt_create, gmt_modified
+  </sql>
+
+  <select id="getById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_white_domain
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="countByCondition" parameterType="map" resultType="long">
+    select count(*) from sys_white_domain
+    <include refid="select_condition" />
+  </select>
+
+  <sql id="select_condition">
+    
+
+  </sql>
+
+  <select id="selectListByCondition" parameterType="map" resultType="com.zxh.crawlerdisplay.web.system.dto.white.SysWhiteDomainDTO">
+      SELECT
+        id as id,
+        sort as sort,
+        white_address as whiteAddress,
+        status as status,
+        create_by as createBy,
+        update_by as updateBy,
+        gmt_create as gmtCreate,
+        gmt_modified as gmtModified
+      FROM sys_white_domain
+      <include refid="select_condition" />
+      <if test="sidx!=null and sord!=null">
+        ORDER BY ${sidx} ${sord}
+      </if>
+      <if test="startQuery!=null and  pageSize!=null">
+  	  	 LIMIT #{startQuery},#{pageSize}  	
+  	  </if>
+  </select>
+
+  <select id="getDetailById" parameterType="java.lang.String" resultType="com.zxh.crawlerdisplay.web.system.dto.white.SysWhiteDomainDTO">
+    SELECT 
+      id as id,
+      sort as sort,
+      white_address as whiteAddress,
+      status as status,
+      create_by as createBy,
+      update_by as updateBy,
+      gmt_create as gmtCreate,
+      gmt_modified as gmtModified
+    FROM sys_white_domain
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String">
+    delete from sys_white_domain
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.zxh.crawlerdisplay.web.system.entity.SysWhiteDomain">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      select lower(sys_guid()) from dual
+    </selectKey>
+    insert into sys_white_domain (id, sort, white_address, 
+      status, create_by, update_by, 
+      gmt_create, gmt_modified)
+    values (#{id,jdbcType=VARCHAR}, #{sort,jdbcType=BIGINT}, #{whiteAddress,jdbcType=VARCHAR}, 
+      #{status,jdbcType=SMALLINT}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.zxh.crawlerdisplay.web.system.entity.SysWhiteDomain">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      select lower(sys_guid()) from dual
+    </selectKey>
+    insert into sys_white_domain
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="whiteAddress != null">
+        white_address,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=VARCHAR},
+      <if test="sort != null">
+        #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="whiteAddress != null">
+        #{whiteAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.zxh.crawlerdisplay.web.system.entity.SysWhiteDomain">
+    update sys_white_domain
+    <set>
+      <if test="whiteAddress != null">
+        white_address = #{whiteAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="update" parameterType="com.zxh.crawlerdisplay.web.system.entity.SysWhiteDomain">
+    update sys_white_domain
+    set 
+      white_address = #{whiteAddress,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

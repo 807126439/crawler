@@ -1,0 +1,8 @@
+一、解决多个有拖拽功能上传插件的bug
+	uploader.js
+	新增 70-74行：
+	
+		uploader.addButton({
+	    id: $filePicker2,
+	    label: '继续添加'
+	  });  

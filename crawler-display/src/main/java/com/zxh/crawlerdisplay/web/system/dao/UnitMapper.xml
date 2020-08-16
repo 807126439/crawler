@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxh.crawlerdisplay.web.system.dao.IUnitDao">
+
+  <resultMap id="BaseResultMap" type="com.zxh.crawlerdisplay.web.system.entity.Unit">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="sort_no" jdbcType="INTEGER" property="sortNo" />
+    <result column="unit_name" jdbcType="VARCHAR" property="unitName" />
+    <result column="unit_type" jdbcType="VARCHAR" property="unitType" />
+    <result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
+    <result column="contractor_type_code" jdbcType="VARCHAR" property="contractorTypeCode" />
+    <result column="link_man" jdbcType="VARCHAR" property="linkMan" />
+    <result column="link_tel" jdbcType="VARCHAR" property="linkTel" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="flag" jdbcType="SMALLINT" property="flag" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, sort_no, unit_name, unit_type, organization_code,contractor_type_code, link_man, link_tel, note, status, 
+    flag, create_by, update_by, gmt_create, gmt_modified
+  </sql>
+
+  <select id="getById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from c_unit
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="countByCondition" parameterType="map" resultType="long">
+    SELECT COUNT(*) FROM c_unit
+    <include refid="select_condition" />
+  </select>
+
+  <sql id="select_condition">
+    <where>
+      <if test="id!=null">
+        id=#{id}
+      </if>
+      <if test="sortNo!=null">
+        AND sort_no=#{sortNo}
+      </if>
+      <if test="unitName!=null">
+        AND unit_name like #{unitName}
+      </if>
+      <if test="unitType!=null">
+        AND unit_type=#{unitType}
+      </if>
+      <if test="organizationCode!=null">
+        AND organization_code=#{organizationCode}
+      </if>
+       <if test="contractorTypeCode!=null">
+        AND contractor_type_code=#{contractorTypeCode}
+      </if>
+      <if test="linkMan!=null">
+        AND link_man=#{linkMan}
+      </if>
+      <if test="linkTel!=null">
+        AND link_tel=#{linkTel}
+      </if>
+      <if test="note!=null">
+        AND note=#{note}
+      </if>
+      <if test="status!=null">
+        AND status=#{status}
+      </if>
+      <if test="flag!=null">
+        AND flag=#{flag}
+      </if>
+      <if test="createBy!=null">
+        AND create_by=#{createBy}
+      </if>
+      <if test="updateBy!=null">
+        AND update_by=#{updateBy}
+      </if>
+      <if test="gmtCreate!=null">
+        AND gmt_create=#{gmtCreate}
+      </if>
+      <if test="gmtModified!=null">
+        AND gmt_modified=#{gmtModified}
+      </if>
+      <if test="ids != null and ids.length > 0">
+        AND id IN <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectListByCondition" parameterType="map" resultType="com.zxh.crawlerdisplay.web.system.dto.unit.UnitDTO">
+    select 
+      id AS id,
+      sort_no AS sortNo,
+      unit_name AS unitName,
+      unit_type AS unitType,
+      organization_code AS organizationCode,
+      contractor_type_code as contractorTypeCode,
+      link_man AS linkMan,
+      link_tel AS linkTel,
+      note AS note,
+      status AS status,
+      flag AS flag,
+      create_by AS createBy,
+      update_by AS updateBy,
+      gmt_create AS gmtCreate,
+      gmt_modified AS gmtModified
+    from c_unit
+    <include refid="select_condition" />
+    <if test="sidx!=null and sord!=null">
+      ORDER BY ${sidx} ${sord}
+    </if>
+    <if test="startQuery!=null and pageSize!=null">
+      LIMIT #{startQuery},#{pageSize}  
+    </if>
+  </select>
+
+  <select id="getDetailById" parameterType="java.lang.String" resultType="com.zxh.crawlerdisplay.web.system.dto.unit.UnitDTO">
+    SELECT 
+      id AS id,
+      sort_no AS sortNo,
+      unit_name AS unitName,
+      unit_type AS unitType,
+      organization_code AS organizationCode,
+      contractor_type_code as contractorTypeCode,
+      link_man AS linkMan,
+      link_tel AS linkTel,
+      note AS note,
+      status AS status,
+      flag AS flag,
+      create_by AS createBy,
+      update_by AS updateBy,
+      gmt_create AS gmtCreate,
+      gmt_modified AS gmtModified
+    FROM c_unit
+
+    WHERE id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  
+   <select id="getDetailByOrganizationCode" parameterType="java.lang.String" resultType="com.zxh.crawlerdisplay.web.system.dto.unit.UnitDTO">
+    SELECT 
+      id AS id,
+      sort_no AS sortNo,
+      unit_name AS unitName,
+      unit_type AS unitType,
+      organization_code AS organizationCode,
+      contractor_type_code as contractorTypeCode,
+      link_man AS linkMan,
+      link_tel AS linkTel,
+      note AS note,
+      status AS status,
+      flag AS flag,
+      create_by AS createBy,
+      update_by AS updateBy,
+      gmt_create AS gmtCreate,
+      gmt_modified AS gmtModified
+    FROM c_unit
+    WHERE organization_code = #{organizationCode,jdbcType=VARCHAR}
+  </select>
+  
+  
+  
+
+  <delete id="deleteById" parameterType="java.lang.String">
+    delete from c_unit
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+
+	
+
+
+
+  <insert id="insert" parameterType="com.zxh.crawlerdisplay.web.system.entity.Unit">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT REPLACE(UUID(),'-','')
+    </selectKey>
+    insert into c_unit (id, sort_no, unit_name, 
+      unit_type, organization_code,contractor_type_code, link_man, 
+      link_tel, note, status, 
+      flag, create_by, update_by, 
+      gmt_create, gmt_modified)
+    values (#{id,jdbcType=VARCHAR}, #{sortNo,jdbcType=INTEGER}, #{unitName,jdbcType=VARCHAR}, 
+      #{unitType,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR},#{contractorTypeCode,jdbcType=VARCHAR}, #{linkMan,jdbcType=VARCHAR}, 
+      #{linkTel,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, 
+      #{flag,jdbcType=SMALLINT}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.zxh.crawlerdisplay.web.system.entity.Unit">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT REPLACE(UUID(),'-','')
+    </selectKey>
+    insert into c_unit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="sortNo != null">
+        sort_no,
+      </if>
+      <if test="unitName != null">
+        unit_name,
+      </if>
+      <if test="unitType != null">
+        unit_type,
+      </if>
+      <if test="organizationCode != null">
+        organization_code,
+      </if>
+      <if test="organizationCode != null">
+        contractor_type_code,
+      </if>
+      <if test="linkMan != null">
+        link_man,
+      </if>
+      <if test="linkTel != null">
+        link_tel,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=VARCHAR},
+      <if test="sortNo != null">
+        #{sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="unitName != null">
+        #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="unitType != null">
+        #{unitType,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null">
+        #{organizationCode,jdbcType=VARCHAR},
+      </if>
+       <if test="contractorTypeCode != null">
+        #{contractorTypeCode,jdbcType=VARCHAR},
+      </if>
+       <if test="linkMan != null">
+        #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTel != null">
+        #{linkTel,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=SMALLINT},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.zxh.crawlerdisplay.web.system.entity.Unit">
+    update c_unit
+    <set>
+      <if test="sortNo != null">
+        sort_no = #{sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="unitName != null">
+        unit_name = #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="unitType != null">
+        unit_type = #{unitType,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null">
+        organization_code = #{organizationCode,jdbcType=VARCHAR},
+      </if>    
+      <if test="contractorTypeCode != null">
+        contractor_type_code = #{contractorTypeCode,jdbcType=VARCHAR},
+      </if>      
+      <if test="linkMan != null">
+        link_man = #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTel != null">
+        link_tel = #{linkTel,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=SMALLINT},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="update" parameterType="com.zxh.crawlerdisplay.web.system.entity.Unit">
+    update c_unit
+    set sort_no = #{sortNo,jdbcType=INTEGER},
+      unit_name = #{unitName,jdbcType=VARCHAR},
+      unit_type = #{unitType,jdbcType=VARCHAR},
+      organization_code = #{organizationCode,jdbcType=VARCHAR},
+      contractor_type_code = #{contractorTypeCode,jdbcType=VARCHAR},
+      link_man = #{linkMan,jdbcType=VARCHAR},
+      link_tel = #{linkTel,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      flag = #{flag,jdbcType=SMALLINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

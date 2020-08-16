@@ -1,0 +1,56 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>错误</title>
+    
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	
+		
+	<%@include file="/page/common/script/base-css.jsp" %>
+
+  </head>
+  
+  <body>
+  
+  
+ 		 <article class="page-404 minWP text-c">
+	    	<p class="error-title"><i class="Hui-iconfont va-m">&#xe688;</i>
+	    		<span class="va-m" style="font-size: 40px">业务错误</span>
+	    	</p>
+	    	<p class="error-description" style="color: #F7B824;font-size: 18px">${exceptionMessage}</p>
+	    	<p class="error-info">您可以：
+	    		<a href="javascript:;" onclick="history.go(-1)" class="c-primary">&lt; 返回上一页</a>
+	    		<span class="ml-20">|</span>
+	    		<a href="javascript:;" class="c-primary ml-20" onclick="getContextPath()">去首页 &gt;</a>
+	    	</p>
+	    </article>
+	  
+      
+	<script type="text/javascript">
+			
+		function getContextPath() {
+		  var contextPath = document.location.pathname;	
+		  var index =contextPath.substr(1).indexOf("/");
+		  contextPath = contextPath.substr(0,index+1);
+		
+		   window.top.location.href = contextPath+"/index.do";
+		} 
+		
+		</script>
+
+</body>
+</html>

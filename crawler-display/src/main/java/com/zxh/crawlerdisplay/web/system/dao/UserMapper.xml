@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zxh.crawlerdisplay.web.system.dao.IUserDao" >
+
+
+  <resultMap id="BaseResultMap" type="com.zxh.crawlerdisplay.web.system.entity.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="sort" jdbcType="BIGINT" property="sort" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="chinese_name" jdbcType="VARCHAR" property="chineseName" />
+    <result column="pass_word" jdbcType="VARCHAR" property="passWord" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="office_tel" jdbcType="VARCHAR" property="officeTel" />
+    <result column="link_address" jdbcType="VARCHAR" property="linkAddress" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="credentials_non_expired" jdbcType="BIT" property="credentialsNonExpired" />
+    <result column="account_non_locked" jdbcType="BIT" property="accountNonLocked" />
+    <result column="account_non_expired" jdbcType="BIT" property="accountNonExpired" />
+    <result column="user_type" jdbcType="SMALLINT" property="userType" />
+    <result column="wx_code" jdbcType="VARCHAR" property="wxCode" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, sort, user_name, chinese_name, pass_word, email, phone, office_tel, link_address, memo, enabled, credentials_non_expired, account_non_locked, 
+    account_non_expired, user_type, wx_code,gmt_create, gmt_modified
+  </sql>
+
+  
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <select id="getUserByCondition" resultType="UserDTO" parameterType="hashmap" >
+    select 
+      u.id AS id,
+      u.user_name AS userName,
+      u.chinese_name AS chineseName,
+      u.pass_word AS passWord,
+      u.email AS email,
+      u.phone AS phone,
+      u.office_tel AS officeTel,
+      u.link_address AS linkAddress,
+      u.memo AS memo,
+      u.enabled AS enabled,
+      u.user_type AS userType,
+      u.wx_code AS wxCode,
+      u.gmt_create AS gmtCreate
+    from c_user u
+    <include refid="select_contition" />
+  </select>
+  
+ 
+  
+  <select id="countByCondition"  parameterType="hashmap" resultType="java.lang.Long">
+  	SELECT  COUNT(*) FROM c_user u 
+  	left join c_unit un on u.unit_id = un.id
+  	 <include refid="select_contition" />	 
+  </select>
+  
+  
+  
+  <sql id="select_column_list"> 	
+	  u.id AS id,
+      u.user_name AS userName,
+      u.chinese_name AS chineseName,
+      u.pass_word AS passWord,
+      u.email AS email,
+      u.phone AS phone,
+      u.office_tel AS officeTel,
+      u.link_address AS linkAddress,
+      u.memo AS memo,
+      u.enabled AS enabled,
+      u.user_type AS userType,
+      u.gmt_create AS gmtCreate ,
+      u.unit_id as unitId,
+      un.unit_name as unitName  
+  </sql>
+  
+   <sql id="select_contition">
+ 		<where>  		 		
+  		   <if test="userName!=null">
+  		   	 AND u.user_name LIKE #{userName}
+  		   </if> 
+  		    <if test="chineseName!=null">
+  		   	AND u.chinese_name LIKE #{chineseName}
+  		   </if>   	
+  		   <if test="excludeUserIds != null">
+  		   	AND u.id not in <foreach collection="excludeUserIds" item="id" index="index" open="(" separator="," close=")">#{id}</foreach>
+  		   </if>
+  		   <if test="onlyUserName!=null">
+  		   	AND u.user_name = #{onlyUserName}
+  		   </if> 
+  		   <if test="wxCode!=null">
+  		   	AND u.wx_code = #{wxCode}
+  		   </if>
+  		   <if test="enabled!=null">
+  		   	AND u.enabled = #{enabled}
+  		   </if>
+  		    <if test="unitId!=null">
+  		   	AND u.unit_id = #{unitId}
+  		   </if>
+  		    <if test="unitName!=null">
+  		   	AND un.unit_name like #{unitName}
+  		   </if>   
+	      <if test="ids != null and ids.length > 0">
+	        AND u.id IN <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
+	      </if>    	  		 
+  		</where> 	 	  	  	
+   </sql>
+
+  
+  <select id="selectListByCondition" resultType="UserDTO" parameterType="hashmap">  
+ 		 SELECT	
+  		 <include refid="select_column_list" />
+  		 FROM c_user u left join c_unit un on u.unit_id = un.id
+  		 <include refid="select_contition" />
+  	
+		 <if test="sidx!=null and sord!=null">
+		 	ORDER BY ${sidx} ${sord}
+		 </if>
+		 <if test="startQuery!=null and  pageSize!=null">
+		 	LIMIT #{startQuery},#{pageSize}    	
+	  	 </if>
+    	  
+  </select>
+  
+ <select id="getDetailById" resultType="UserDTO">
+ 	 SELECT	
+  		u.id,
+  		u.unit_id as unitId,
+		u.gmt_modified AS gmtModified,
+		u.user_name AS userName,
+		u.chinese_name AS chineseName,
+		u.email,
+		u.phone,
+		u.office_tel as officeTel,
+		u.user_type AS userType,		
+		u.gmt_create AS gmtCreate,
+		u.memo,
+		u.enabled,
+		u.wx_code AS wxCode,
+		un.unit_name as unitName
+  	FROM c_user u left join c_unit un on u.unit_id = un.id
+  	  where u.id = #{id,jdbcType=VARCHAR}
+ </select>
+
+
+
+  <select id="selectLoginUserByName" parameterType="java.lang.String" resultType="LoginUserDTO">
+  	SELECT
+		u.id AS id,
+		u.user_name AS userName,
+		u.pass_word AS PASSWORD,
+		u.chinese_name AS chineseName,
+		u.phone AS phone,
+		u.user_type AS userType,
+		u.unit_id AS unitId,
+		u.enabled AS enabled,
+		u.account_non_expired AS accountNonExpired,
+		u.account_non_locked AS accountNonLocked,
+		u.credentials_non_expired AS credentialsNonExpired,
+		un.unit_name as unitName
+	FROM
+		c_user u
+	left join c_unit un on u.unit_id = un.id	
+	 WHERE u.user_name=#{userName}
+  
+  </select>
+
+
+  
+  <select id="getUniqueByProperty" resultMap="BaseResultMap" parameterType="CommonParam">
+  	 SELECT * FROM c_user WHERE ${filedName}=#{value}
+  
+  </select>
+  
+  <select id="checkUniqueIsExist" resultType="java.lang.Long" parameterType="CommonParam">
+  	 SELECT COUNT(*) FROM c_user WHERE ${filedName}=#{value} 
+  	 <if test="excludeId!=null">
+  	 	AND id  &lt;&gt; #{excludeId}
+  	 </if>
+  </select>
+  
+
+  
+  
+  <select id="selectWeiUser" resultType="com.zxh.crawlerdisplay.web.system.dto.user.WeiUserDTO">
+  	SELECT id,user_name AS userName,chinese_name AS chineseName FROM c_user 
+  	WHERE user_type=0
+
+  </select>
+ 
+  
+  
+  <!-- 写操作 -->
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from c_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+
+
+  <insert id="insert" parameterType="com.zxh.crawlerdisplay.web.system.entity.User">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT REPLACE(UUID(),'-','')
+    </selectKey>
+    insert into c_user (id, sort, user_name,unit_id,
+      chinese_name, pass_word, email, 
+      phone, office_tel, link_address, 
+      memo, enabled, credentials_non_expired, 
+      account_non_locked, account_non_expired, user_type, 
+      wx_code,gmt_create, gmt_modified
+      )
+    values (#{id,jdbcType=VARCHAR}, #{sort,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{unitId,jdbcType=VARCHAR},     
+      #{chineseName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{officeTel,jdbcType=VARCHAR}, #{linkAddress,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, #{credentialsNonExpired,jdbcType=BIT}, 
+      #{accountNonLocked,jdbcType=BIT}, #{accountNonExpired,jdbcType=BIT}, #{userType,jdbcType=SMALLINT}, 
+      #{wxCode,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.zxh.crawlerdisplay.web.system.entity.User">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT REPLACE(UUID(),'-','')
+    </selectKey>
+    insert into c_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="chineseName != null">
+        chinese_name,
+      </if>
+      <if test="passWord != null">
+        pass_word,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="officeTel != null">
+        office_tel,
+      </if>
+      <if test="linkAddress != null">
+        link_address,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="credentialsNonExpired != null">
+        credentials_non_expired,
+      </if>
+      <if test="accountNonLocked != null">
+        account_non_locked,
+      </if>
+      <if test="accountNonExpired != null">
+        account_non_expired,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="wxCode != null">
+        wx_code,
+      </if>             
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="unitId != null">
+        unit_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=VARCHAR},
+      <if test="sort != null">
+        #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="chineseName != null">
+        #{chineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="officeTel != null">
+        #{office_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAddress != null">
+        #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="credentialsNonExpired != null">
+        #{credentialsNonExpired,jdbcType=BIT},
+      </if>
+      <if test="accountNonLocked != null">
+        #{accountNonLocked,jdbcType=BIT},
+      </if>
+      <if test="accountNonExpired != null">
+        #{accountNonExpired,jdbcType=BIT},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=SMALLINT},
+      </if>
+      <if test="wxCode != null">
+        #{wxCode,jdbcType=VARCHAR},
+      </if>       
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+       <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.zxh.crawlerdisplay.web.system.entity.User">
+    update c_user
+    <set>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="chineseName != null">
+        chinese_name = #{chineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        pass_word = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="officeTel != null">
+        office_tel = #{officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAddress != null">
+        link_address = #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="credentialsNonExpired != null">
+        credentials_non_expired = #{credentialsNonExpired,jdbcType=BIT},
+      </if>
+      <if test="accountNonLocked != null">
+        account_non_locked = #{accountNonLocked,jdbcType=BIT},
+      </if>
+      <if test="accountNonExpired != null">
+        account_non_expired = #{accountNonExpired,jdbcType=BIT},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=SMALLINT},
+      </if>
+       <if test="wxCode != null">
+        wx_code = #{wxCode,jdbcType=VARCHAR},
+      </if>          
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unitId != null">
+        unit_id = #{unitId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="update" parameterType="com.zxh.crawlerdisplay.web.system.entity.User">
+    update c_user
+    set sort = #{sort,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      chinese_name = #{chineseName,jdbcType=VARCHAR},
+      pass_word = #{passWord,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      office_tel = #{officeTel,jdbcType=VARCHAR},
+      link_address = #{linkAddress,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=BIT},
+      credentials_non_expired = #{credentialsNonExpired,jdbcType=BIT},
+      account_non_locked = #{accountNonLocked,jdbcType=BIT},
+      account_non_expired = #{accountNonExpired,jdbcType=BIT},
+      user_type = #{userType,jdbcType=SMALLINT},
+      wx_code = #{wxCode,jdbcType=VARCHAR},    
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      unit_id = #{unitId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  
+  
+  
+  <insert id="bathInsertUserAndRole" parameterType="hashmap">
+ 	INSERT  INTO c_user_role(user_id,role_id) VALUES		
+	<foreach collection="roleIds" item="rid" index="index" separator=",">
+	  (#{userId},#{rid})
+	</foreach>
+  
+   </insert>
+   
+   
+  <delete id="deleteUserAndRoleRelation" >
+    DELETE FROM c_user_role WHERE user_id=#{userId} AND role_id in
+    <foreach collection="roleIds" item="rid" open="(" close=")" separator=",">
+      #{rid}
+    </foreach>
+  </delete>
+  
+  <delete id="deleteUserAndRoleByUserId" parameterType="java.lang.String">
+    DELETE FROM c_user_role WHERE user_id=#{userId}  
+  </delete>
+  
+  
+  
+  <update id="changePassword" parameterType="hashmap">
+  	UPDATE c_user SET pass_word=#{pwd} WHERE id=#{id}
+  </update>
+  
+
+
+  
+</mapper>

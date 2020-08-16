@@ -1,0 +1,11 @@
+一、上传预览新增文件图标
+ 	uploder.js 新增第118行，132行matchType方法
+ 	uploder.css 更新
+
+ 二、filemanager的option参数btns扩展，根据选中文件数判断可用不可用
+ 	filemanager.js 
+ 		修改了 第123-143行
+ 	 		btns:[],//更多按钮及其触发函数，min表示文件选择小于该值按钮不可用，默认0，max表示文件选择大于该值按钮不可用，默认1000。
+ 	 		示例 btns:['按钮1',{text:'按钮2',min:1,max:1,}],function(){},function(){}]
+
+ 	 	修改了 第525行的afterCheck方法，548行开始是新增内容

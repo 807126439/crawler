@@ -1,0 +1,53 @@
+html{font-family: "Microsoft YaHei";}
+body{background-color: #fff;}
+a:hover{ text-decoration: none; }
+
+
+
+
+/*btn*/
+a.btn, a.btn.size-M, span.btn, span.btn.size-M {line-height: 22px;border:none;}
+.input-text, .btn, .input-text.size-M, .btn.size-M {height: 30px;}
+a.size-36,span.size-36{height:auto;line-height: 22px;padding: 6px 10px;}
+.btn_ddd:hover{background-color: #D2D2D2;color: #555;}
+.btn_pri:hover{background-color:#048EDC;color: #FFF;}
+.btn_org:hover{background-color: #FF952B;color: #FFF;}
+
+
+
+
+/*aboutus*/
+.banner_aboutus{background: url('../images/bannerbg_aboutus.jpg') no-repeat center;}
+
+.timeline{margin: 30px 20px;padding: 20px}
+.timeline-hd{ width: 220px;height: 40px;line-height: 40px;background-color: #0181C9;margin-left: 42px;color: #FFF;text-align: center;font-size: 20px;} 
+.timeline-bd {  position: relative; padding: 0px 0px 20px  154px;  margin: 26px 0px;overflow: hidden;} 
+.timeline-bd:before {content:'';position:absolute;top:-10px;left:169px;height:100%;width:1px;background:#0181C9;}
+.timepoint {  position: relative;  margin: 0px; line-height:22px;font-size: 16px;} 
+.timepoint+.timepoint{  margin-top: 34px;} 
+.timepoint-i{display: inline-block;position: absolute;top: 0px;left: 0px;width: 30px;height: 30px;}
+.timepoint-primary .timepoint-i{background: url('../images/icon_time.png') no-repeat;}
+.timepoint-secondary .timepoint-i{width:31px;background: url('../images/icon_timepoint.png') no-repeat center;}
+.timepoint-date{position: absolute;right: 100%;top: 0px;margin-right: 10px;width: 134px;text-align: right;padding-top: 4px;}
+.timepoint-primary .timepoint-date{color: #F08519;}
+.timepoint-secondary .timepoint-date{color: #999;}
+.timepoint-content{margin-left:40px;color:#666;padding-top: 4px;min-height: 22px; line-height: 24px;}
+
+
+
+
+@media \0screen\,screen\9 {
+	#slider-1 .dotlist{background-color:#000;filter:Alpha(opacity=40);position:static;}
+	.navmenu .menu{background-color:#000;filter:Alpha(opacity=60);position:static;}
+	.toTop{background-color:#000;filter:Alpha(opacity=40);}
+	.toTop:hover{background-color:#000;}
+	.subnav-tabbg{background-color:#000;filter:Alpha(opacity=30);position:static;}
+	.maskwraper{background-color:#ffffff;filter:Alpha(opacity=0);}
+	.maskwraper.hover{background-color:transparent;filter:none;}
+	.maskblock{background-color:#ffffff;filter:Alpha(opacity=70);position:static;}
+}
+@media screen and (min-width: 1260px){
+	.sect_friendlink .sect-mod{width: 16.6%;}
+}
+
+.clear {clear: both;}

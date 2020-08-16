@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxh.crawlerdisplay.web.file.dao.IZonePathDao">
+
+  <resultMap id="BaseResultMap" type="com.zxh.crawlerdisplay.web.file.entity.ZonePath">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="text" jdbcType="VARCHAR" property="text" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="virtual_path" jdbcType="VARCHAR" property="virtualPath" />
+    <result column="view_path" jdbcType="VARCHAR" property="viewPath" />
+    <result column="warm_value" jdbcType="BIGINT" property="warmValue" />
+    <result column="zone_name" jdbcType="VARCHAR" property="zoneName" />
+    <result column="flag" jdbcType="SMALLINT" property="flag" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, text, priority, path, type, virtual_path, view_path, warm_value, zone_name, flag, 
+    status, gmt_create, gmt_modified
+  </sql>
+
+  
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from m_zone_path
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+
+  <select id="selectListByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	SELECT * FROM m_zone_path
+	WHERE
+		type = #{type}
+	ORDER BY
+		priority ASC
+  
+  </select>
+  
+  
+  
+
+  <select id="countByCondition" resultType="java.lang.Long" parameterType="hashmap">
+  	SELECT  COUNT(*) FROM m_zone_path
+
+  </select>
+  
+  <select id="selectListByCondition" parameterType="hashmap" resultMap="BaseResultMap">
+  	
+	  SELECT *  FROM  m_zone_path		
+	  <if test="sidx!=null and sord!=null">
+		 ORDER BY ${sidx} ${sord}
+	  </if>	
+  	  <if test="startQuery!=null and  pageSize!=null">
+  	  	 LIMIT #{startQuery},#{pageSize}  	
+  	  </if>
+  
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- 写操作 -->
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from m_zone_path
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+ 
+ <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zxh.crawlerdisplay.web.file.entity.ZonePath" useGeneratedKeys="true">
+    insert into m_zone_path (text, priority, path, 
+      type, virtual_path, view_path, 
+      warm_value, zone_name, flag, 
+      status, gmt_create, gmt_modified
+      )
+    values (#{text,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, #{path,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{virtualPath,jdbcType=VARCHAR}, #{viewPath,jdbcType=VARCHAR}, 
+      #{warmValue,jdbcType=BIGINT}, #{zoneName,jdbcType=VARCHAR}, #{flag,jdbcType=SMALLINT}, 
+      #{status,jdbcType=SMALLINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zxh.crawlerdisplay.web.file.entity.ZonePath" useGeneratedKeys="true">
+    insert into m_zone_path
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="text != null">
+        text,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="virtualPath != null">
+        virtual_path,
+      </if>
+      <if test="viewPath != null">
+        view_path,
+      </if>
+      <if test="warmValue != null">
+        warm_value,
+      </if>
+      <if test="zoneName != null">
+        zone_name,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="text != null">
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualPath != null">
+        #{virtualPath,jdbcType=VARCHAR},
+      </if>
+      <if test="viewPath != null">
+        #{viewPath,jdbcType=VARCHAR},
+      </if>
+      <if test="warmValue != null">
+        #{warmValue,jdbcType=BIGINT},
+      </if>
+      <if test="zoneName != null">
+        #{zoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.zxh.crawlerdisplay.web.file.entity.ZonePath">
+    update m_zone_path
+    <set>
+      <if test="text != null">
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualPath != null">
+        virtual_path = #{virtualPath,jdbcType=VARCHAR},
+      </if>
+      <if test="viewPath != null">
+        view_path = #{viewPath,jdbcType=VARCHAR},
+      </if>
+      <if test="warmValue != null">
+        warm_value = #{warmValue,jdbcType=BIGINT},
+      </if>
+      <if test="zoneName != null">
+        zone_name = #{zoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="update" parameterType="com.zxh.crawlerdisplay.web.file.entity.ZonePath">
+    update m_zone_path
+    set text = #{text,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=INTEGER},
+      path = #{path,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      virtual_path = #{virtualPath,jdbcType=VARCHAR},
+      view_path = #{viewPath,jdbcType=VARCHAR},
+      warm_value = #{warmValue,jdbcType=BIGINT},
+      zone_name = #{zoneName,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=SMALLINT},
+      status = #{status,jdbcType=SMALLINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+ 
+</mapper>

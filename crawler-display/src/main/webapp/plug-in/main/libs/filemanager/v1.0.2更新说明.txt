@@ -1,0 +1,15 @@
+一、新增升序降序 和 列表信息展示和排序
+	图片view.png更新
+	新增图片fileicon-large-video.png和fileicon-small-video.png（视频没预览图的图标）
+ 	filemanager.css 更新
+ 	filemanager.js 
+ 	  新增 第19行的升降input，默认desc
+ 	  新增 30-33行的 <div class="filedata-all">
+ 	  新增 60行的 $filedataAll
+ 	  新增 第70-71行的$sortBtn和$sortMethor
+ 	  修改 第123,125,127行的<li>
+ 	  新增 第168行的$sortBtn.on()事件绑定
+ 	  修改 第173行的$sortInput.val()
+ 	  新增 第174-176行的$filedataAll.on事件绑定
+ 	  修改 第586行的fileSort方法
+ 	  修改 第602行的fileDisplay方法

@@ -1,0 +1,84 @@
+body{background: #FCFCFB;min-width: auto;position: absolute;top: 0;left: 0;right: 0;bottom: 0;min-width: 1280px;}
+
+.header{position: relative; height:100px;box-sizing: border-box; background: #1c5e4e ;z-index: 1000;box-shadow: 0 1px 2px 0 rgba(0,0,0,.1)}
+@media (max-height: 814px) {
+  .header{height: 90px;}
+}
+.header-container{margin: auto;position: relative;}
+.header-title{height:54px; display: block;background-size:contain;background-repeat: no-repeat;background-position:left center;position: absolute;left: 25px;right: 0; top: 50%;margin-top: -27px;}
+
+/*菜单图标*/
+.header-nav{float: right;height: 100%;}
+.header-nav__item{float: left;display: block; min-width: 100px;height: 100%; position: relative;text-align: center;font-size: 0;line-height: 0;}
+@media (max-height: 814px) {
+  .header-nav__item{ min-width: 90px;}
+}
+.header-nav__item>a{ display:block;height: 100%; ;color: #fff;padding: 5px;box-sizing: border-box;}
+@media (max-height: 814px) {
+  .header-nav__item>a{padding:1px 5px 0 5px;}
+}
+/*.header-nav__item.home-item.active{display: none;}*/
+.header-nav__item>a:hover{  color: #fff;background: #76a3f8; }
+.icon-menu{display: block;margin:15px auto 6px auto;width: 40px;height: 40px;background-repeat: no-repeat;background-position: center;  }
+.header-nav__item .text-menu{display: block;margin:0 5px auto;line-height: 22px;font-size: 14px; text-align: center;white-space: nowrap;word-wrap: normal;overflow: hidden;}
+.header-nav__item .badge-menu{position: absolute;top: 5px;right: 5px;background:url(../images/icons.png) no-repeat -101px -2px ;height: 22px; line-height: 22px;width: 22px;text-align: center;border-radius: 0; font-size: 12px;white-space: nowrap;word-wrap: normal; }
+
+/*更多*/
+#moreNav{position: relative;margin-left: 4px;width: 100px;}
+#moreNav:before{content: ' ';display: block;width: 4px;height: 100%;position: absolute;top: 0;right: 100%; background:#3c66a9; background: -webkit-linear-gradient(left,rgba(0,0,0,0) 24%,rgba(0,0,0,.3));background: -o-linear-gradient(right,rgba(0,0,0,0) 24%,rgba(0,0,0,.3));background: -moz-linear-gradient(right,rgba(0,0,0,0) 24%,rgba(0,0,0,.3));background: linear-gradient(to right,rgba(0,0,0,0) 24%,rgba(0,0,0,.3))}
+.header-more-nav-bar{display: none; position: fixed;top: 100px;right: 0;bottom: 0;z-index: 11111;width: 120px; overflow: auto;animation:rightSlideIn 0.3s;-webkit-animation:rightSlideIn 0.3s; }
+@media (max-height: 814px) {
+  .header-more-nav-bar{top:90px;}
+}
+.header-more-nav-bar.showed,.header-more-nav-bar:hover{display: block; }
+.header-more-nav{float: right;min-height: 100%;background: #4778c7;}
+@keyframes rightSlideIn{
+  0% {-webkit-transform: translateX(100%);transform: translateX(100%);}
+  100% {-webkit-transform: translateX(0%);transform: translateX(0%);}
+}
+@-webkit-keyframes rightSlideIn{
+  0% {-webkit-transform: translateX(100%);transform: translateX(100%);}
+  100% {-webkit-transform: translateX(0%);transform: translateX(0%);}
+}
+.header-more-nav__item{width: 100px;position: relative;margin-top: 1px;}
+.header-more-nav__item:before{content: ' ';display: block;position: absolute;top: -1px;left: 15px;right: 15px;height: 0;border-bottom: 1px solid #5a86cd;}
+.header-more-nav__item>a{display: block;color: #fff;padding: 8px 0}
+.header-more-nav__item>a:hover{color: #fff;background: #76a3f8}
+.header-more-nav__item .text-menu{display: block;margin:0 5px auto;line-height: 22px;font-size: 14px; text-align: center;}
+.header-more-nav__item .badge-menu{position: absolute;top: 5px;right: 5px;background:url(../images/icons.png) no-repeat -101px -2px ;height: 22px; line-height: 22px;width: 22px;text-align: center;border-radius: 0; font-size: 12px;white-space: nowrap;word-wrap: normal;color: #fff }
+
+/**
+ * 主框架容器
+ */
+.main-container{position: absolute;top:100px;left:0;right:0;bottom:0;overflow: hidden; }
+@media (max-height: 814px) {
+  .main-container{top:90px;}
+}
+
+.loading {background:url(../images/loading.gif) no-repeat center; height:100px}
+.show_iframe iframe {position: absolute;bottom: 0;height: 100%;width: 100%}
+.Hui-tabNav-more {position: absolute;right:3px;top:4px;display: none}
+.Hui-tabNav-more #js-tabNav-prev,.Hui-tabNav-more #js-tabNav-next{padding:3px 8px;background: #fcfcfb; }
+.Hui-tabNav-more #js-tabNav-next{padding:3px 8px;background: #fcfcfb;margin-left: 2px;}
+
+#iframe_box{top:30px;position: absolute; bottom: 0;left: 0;right: 0;overflow: auto;z-index: 1;}
+
+/*顶部栏*/
+.welcome-bar{height: 26px; line-height:26px;font-size: 13px; padding:1px 20px;color: #333;border-bottom: 1px solid #bbb;background: #fff; position: relative;z-index: 1;box-shadow:0 2px 2px 0 rgba(0,0,0,.1)}
+.welcome-bar:after{content: '\20';display: block;clear: both;zoom: 1;height: 0;}
+.welcome-bar__left{ text-overflow: ellipsis;white-space: nowrap;word-wrap:normal; }
+.welcome-bar__right{float: right;text-align: right;padding-left: 14px;}
+.welcome-bar__right~.welcome-bar__left{margin-right: 160px;}
+.welcome-bar~.show_iframe{position: absolute;top: 29px;left: 0;bottom: 0;right: 0;height: auto;}
+
+.icon-tri{display: inline-block;vertical-align: middle;width: 0;height: 0;border-top: 6px solid #555;border-left: 4px solid transparent;border-right: 4px solid transparent;margin:-3px 16px 0 5px;cursor: pointer;}
+
+.header-buttons-btn-wrap{display: inline-block;position: relative;}
+.header-buttons-btn-wrap:hover .header-menu-wrap { display: block;}
+.header-buttons-btn-wrap .header-menu-wrap { display: none; position: absolute; top: 100%;margin-top: -4px; left: 0;width:250px; text-align: left;animation:ui-upbit 0.3s;-webkit-animation:ui-upbit 0.3s;}
+.header-buttons-btn-wrap .header-menu { display: inline-block;max-width:250px;min-width:110px;background: #fff;border: 1px solid #aaa;  -webkit-box-shadow: 1px 2px 4px 1px rgba(100,100,100,.3); box-shadow: 1px 2px 5px 1px rgba(100,100,100,.3);text-align: center; }
+.header-buttons-btn-wrap .header-menu a { display: block; color: #333; line-height: 24px; padding:5px }
+.header-buttons-btn-wrap .header-menu a+a { border-top: 1px solid #eee;}
+.header-buttons-btn-wrap .header-menu a.active {color: #4778c7 }
+.header-buttons-btn-wrap .header-menu a.active:after { content:'\221A'; float: right; display: inline-block;}
+.header-buttons-btn-wrap .header-menu a:hover {color: #fff; background: #4778c7}

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zxh.crawlerpersistent.dao.CrawlerContentDao">
+    <resultMap id="BaseResultMap" type="com.zxh.crawlerpersistent.model.CrawlerContent">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="pageId" property="pageId" jdbcType="BIGINT"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="male" property="male" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="startDate" property="startdate" jdbcType="TIMESTAMP"/>
+        <result column="duration" property="duration" jdbcType="INTEGER"/>
+        <result column="destination" property="destination" jdbcType="VARCHAR"/>
+        <result column="leaveFrom" property="leavefrom" jdbcType="VARCHAR"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="browsed" property="browsed" jdbcType="INTEGER"/>
+        <result column="sign" property="sign" jdbcType="INTEGER"/>
+        <result column="attention" property="attention" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.zxh.crawlerpersistent.model.CrawlerContent" extends="BaseResultMap">
+        <result column="introduction" property="introduction" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Blob_Column_List">
+    introduction
+    </sql>
+
+
+    <select id="countByCondition" parameterType="map" resultType="long">
+        SELECT COUNT(*) FROM crawler_content
+        <include refid="select_condition" />
+    </select>
+
+    <select id="selectListByCondition" parameterType="map" resultType="com.zxh.dubbo.model.CrawlerContent">
+        select
+            id AS id,
+            pageId AS pageId,
+            url AS url,
+            male AS male,
+            name AS name,
+            title as title,
+            startDate AS startdate,
+            duration AS duration,
+            destination AS destination,
+            leaveFrom AS leavefrom,
+            gmt_create AS gmtCreate,
+            browsed AS browsed,
+            sign,
+            attention
+        from crawler_content
+        <include refid="select_condition" />
+        <if test="sidx!=null and sord!=null">
+            ORDER BY ${sidx} ${sord}
+        </if>
+        <if test="startQuery!=null and pageSize!=null">
+            LIMIT #{startQuery},#{pageSize}
+        </if>
+    </select>
+
+    <sql id="select_condition">
+
+    </sql>
+
+    <insert id="insert" parameterType="com.zxh.crawlerpersistent.model.CrawlerContent">
+    insert into crawler_content (id, pageId, url, 
+      male, name, title, 
+      startDate, duration, destination, 
+      leaveFrom, introduction,gmt_create,browsed,sign,attention
+      )
+    values (#{id,jdbcType=INTEGER}, #{pageId,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR}, 
+      #{male,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{startdate,jdbcType=TIMESTAMP}, #{duration,jdbcType=INTEGER}, #{destination,jdbcType=VARCHAR}, 
+      #{leavefrom,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR},#{gmtCreate,jdbcType=TIMESTAMP},
+      #{browsed,jdbcType=INTEGER},#{sign,jdbcType=INTEGER},#{attention,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.zxh.crawlerpersistent.model.CrawlerContent">
+        insert into crawler_content
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pageId != null">
+                pageId,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="male != null">
+                male,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="startdate != null">
+                startDate,
+            </if>
+            <if test="duration != null">
+                duration,
+            </if>
+            <if test="destination != null">
+                destination,
+            </if>
+            <if test="leavefrom != null">
+                leaveFrom,
+            </if>
+            <if test="introduction != null">
+                introduction,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="browsed != null">
+                browsed,
+            </if>
+            <if test="sign != null">
+                sign,
+            </if>
+            <if test="attention != null">
+                attention,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="pageId != null">
+                #{pageId,jdbcType=BIGINT},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="male != null">
+                #{male,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="startdate != null">
+                #{startdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="duration != null">
+                #{duration,jdbcType=INTEGER},
+            </if>
+            <if test="destination != null">
+                #{destination,jdbcType=VARCHAR},
+            </if>
+            <if test="leavefrom != null">
+                #{leavefrom,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                #{introduction,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="browsed != null">
+                #{browsed,jdbcType=INTEGER},
+            </if>
+            <if test="sign != null">
+                #{sign,jdbcType=INTEGER},
+            </if>
+            <if test="attention != null">
+                #{attention,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+</mapper>

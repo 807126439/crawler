@@ -1,0 +1,41 @@
+.checktree{position:absolute;right: 0;top: 0;bottom: 0;left: 0;font-family: "Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,tahoma,arial,"WenQuanYi Micro Hei",Verdana,sans-serif,"\5B8B\4F53";}
+.checktree-header{position: absolute;top: 0;left: 0;right: 0;background: #f1f4f7;line-height: 30px;height: 30px;padding: 0 10px;}
+.checktree-header-title{font-size:16px;float: left;}
+.checktree-header-right{float: right;}
+.checktree #sure{display: inline-block;line-height: 26px;padding: 0 12px;color: #fff;background: #009688;border-radius:3px;font-size: 13px;text-decoration: none;}
+.checktree-header a{color: #333}
+.checktree-search{position: absolute;top:30px;left: 0;right: 0;height: 40px;background: #ffffff;padding-bottom: 5px;}
+.checktree-search input{border:none;line-height: 40;height: 40px;width: 100%;display: block;background: transparent;box-sizing:border-box;padding: 0 8px; }
+.checktree-search  .checktree-search-icon+input{padding-left: 40px;}
+.checktree-search-icon{position: absolute;width: 24px;height: 24px;top:8px;left: 8px;background: url(../images/icons_checktree.png) no-repeat -40px 5px}
+.checktree-search:after{content: '';display: block;position: absolute;bottom:5px;left: 20px;right: 20px;border-bottom: 1px solid #ddd}
+.checktree-content{padding:0 15px;overflow: auto;background: #fff;position: absolute;top: 75px;bottom: 0;left: 0;right: 0;}
+.checktree:after{content: '';display: block;height: 10px;left: 0;right: 0;border-radius: 0 0 10px 10px;background: #fff}
+
+#checktreeTree li{white-space:normal;}
+#checktreeTree li>a,#checktreeTree li>a span{color:#222;height:auto;line-height:22px;padding:0;}
+#checktreeTree li>a{display: block;padding:2px 0 2px 5px;}
+#checktreeTree li>.chk+a{padding-left:22px;}
+#checktreeTree li.not-parent>a span{color:#195ea2;}
+#checktreeTree li>a:last-child:hover{background-color: #f0f0f0;}
+#checktreeTree li a:hover{text-decoration: none}
+#checktreeTree li>a:active,#checktreeTree li>a:last-child:active{background-color:#E6E6E6;}
+#checktreeTree li a.curSelectedNode{background-color:transparent;border:0;opacity:1;}
+#checktreeTree li a.curSelectedNode span{}
+#checktreeTree span{margin-right: 2px;}
+#checktreeTree span.button{ line-height: 0;  margin: 0;  width: 16px;  height: 16px;  display: inline-block;  vertical-align: middle;cursor: pointer;  outline: none;}
+#checktreeTree li .switch{float:right;height:26px;}
+#checktreeTree li .switch{background: url(../images/icons_checktree.png) no-repeat}
+#checktreeTree li .switch.noline_open{background-position:-12px 8px }
+#checktreeTree li .switch.noline_close{background-position:-25px 6px ;}
+#checktreeTree li .switch.noline_docu{background:none;}
+#checktreeTree li .chk{width: 13px; height: 13px; margin: 6px 3px 0 0; float:left;cursor: pointer;border: 1px solid #7cbeea;position: relative;}
+#checktreeTree li .chk.checkbox_false_full_focus,#checktreeTree li .chk.radio_false_full_focus {border-color: #1091e7}
+#checktreeTree li .chk.checkbox_true_full,#checktreeTree li .checkbox_true_full_focus,#checktreeTree li .chk.radio_true_full,#checktreeTree li .radio_true_full_focus {background: url(../images/icons_checktree.png) no-repeat 1px 1px}
+#checktreeTree li .chk.checkbox_true_part:before,#checktreeTree li .chk.checkbox_true_part_focus:before,#checktreeTree li .chk.radio_false_part:before,#checktreeTree li .chk.radio_false_part_focus:before{content: '';display: block;position: absolute;width: 7px;height: 7px;left: 3px;top: 3px;background: #65b7ef}
+#checktreeTree li .chk.radio_false_part:before,#checktreeTree li .chk.radio_false_part_focus:before{background: #c4dbea}
+#checktreeTree li .chk.radio_false_full,#checktreeTree li .chk.radio_false_full_focus,#checktreeTree li .chk.radio_true_full,#checktreeTree li .radio_true_full_focus,#checktreeTree li .chk.radio_false_part,#checktreeTree li .radio_false_part_focus,#checktreeTree li .chk.radio_false_part:before,#checktreeTree li .chk.radio_false_part_focus:before{border-radius: 50%}
+#checktreeTree li>a span{vertical-align: top;font-size: 13px}
+#checktreeTree li>a span.ext{color: #888}
+#checktreeTree li.hide{display: none;}
+#checktreeTree li ul { margin: 0; padding: 0 0 0 18px;}

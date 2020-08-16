@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+.warning_light{display: inline-block;height: 24px;width: 24px;background: url(../images/warningLights.png) no-repeat;}
+.warning_light-green{background-position: 0 0}
+.warning_light-yellow{background-position:-24px 0}
+.warning_light-red{background-position: -48px 0}

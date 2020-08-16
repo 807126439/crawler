@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+ .btn-common_text{display: inline-block;background: #55aba3;color: #fff;font-size: 14px;text-align: center;padding: 0 25px 0 15px;line-height:30px;position: relative;}
+ .btn-common_text:after{content: '\20';display:block;position: absolute;right: 8px;top:50%;margin-top: -3px; width: 0;height: 0;border-top: 6px solid #fff;border-left: 4px solid transparent;border-right: 4px solid transparent;}
+ .btn-common_text:hover{background: #41a299;color: #fff}
+
+ .layui-layer.layui-layer-tips .layui-layer-content{box-shadow:1px 1px 6px 1px rgba(0,0,0,0.2);border: 1px solid #ddd;border:rgba(0,0,0,.1)}
+ .layui-layer.layer-skin-common_text.layui-layer-tips i{display: none;}
+ .container-common_text .list-common_text{display: none;}
+ .list-common_text{font-size:13px;line-height:1.4;color: #333;max-height:320px;overflow: auto;}
+ .item-common_text{padding:5px 0;cursor: pointer;}
+ .item-common_text:hover{color: #287770}
+ .item-common_text+.item-common_text{border-top: 1px solid #e0e0e0;}
+ .loading-common_text{font-size: 12px;text-align: center;color: #aaa}

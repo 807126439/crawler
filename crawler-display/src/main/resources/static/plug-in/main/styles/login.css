@@ -1,0 +1,24 @@
+body,html{height:100%;}
+a:hover{text-decoration: none;}
+.loginbg{height:100%;background-color: #f9f9f8;position: relative;}
+.loginbox{width:900px;height:570px;position: absolute;top:50%;margin-top:-290px;left:50%;margin-left:-450px;overflow: visible;}
+.loginbox-tt{text-align: left;margin:20px 15px;}
+.formwrap{background:url('../images/bg_grid.png') repeat;border-radius:8px;box-shadow: 2px 2px 6px 4px #DDD;border:1px solid #CCC;position: relative;}
+.formbg{background:url('../images/bg_form.png') no-repeat;float: left;width:452px;height:470px;}
+.form_login{position: relative;margin-left:452px;padding:40px 40px 0px 40px;}
+.form_login .tt{font-size: 24px;color: #12a851;line-height:20px;padding:25px 0;}
+.form_login .inputgroup{position: relative;margin-top:15px;}
+.form_login .inputgroup input{line-height:20px;font-size:16px;padding:9px 8px 9px 50px;border:1px solid #CCC;outline:none;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;width: 100%;border-radius:2px;}
+.form_login .inputgroup input:focus{border:1px solid #12a851;}
+.form_login .inputgroup .imagecodewrap{margin-right:184px;}
+.form_login .imagecode-img{float: right;display: inline-block;width:180px;height: 40px; vertical-align: middle;overflow: hidden;background-color:#FFF;text-align: center;}
+.checkboxgroup{font-size:14px;margin:15px 0 32px 0;}
+.checkboxgroup label{font-size:14px;}
+.checkboxgroup a{float: right;}
+.checkboxgroup input{width: 16px;height: 16px;margin-right: 10px;}
+.form_login .inputgroup i{background: url('../images/icon_login.png') no-repeat -4px center;height:40px;width:26px;position: absolute;top:0;left:13px;}
+.form_login .inputgroup .icon_login_password{background-position:-37px center;}
+.form_login .inputgroup .icon_login_imgcode{background-position:-75px center;}
+.form_login .btntoolbar{text-align: center;height: 45px}
+.form_login .btntoolbar a{font-size:16px;padding:6px 30px 6px 30px;line-height:20px;color: #FFF;background-color: #27be67;box-shadow:2px -2px 1px #189e51;border:0px;border-radius: 4px;}
+.form_login .btntoolbar a+a{margin-left:8px;}

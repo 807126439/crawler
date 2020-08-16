@@ -1,0 +1,65 @@
+html{height: 100%;}
+body{background-color:#ecf0f1;height: 100%;min-width:1024px;font-family: "Microsoft YaHei";}
+a:hover{ text-decoration: none; }
+
+.header{height:70px;position: absolute;top:0;left:193px;right:0;background-color: #FFF;border-bottom: 1px solid #ababab;}
+.header-tt{position: absolute;top:18px;left:20px;}
+.header-btngroup {position: absolute;right:20px;bottom:10px;}
+.header-btngroup a {color: #0aa84d;line-height:20px;font-size:14px;margin-right:8px;display:inline-block;padding:2px 12px;border-radius:13px;border: 1px solid #ddd;min-width:52px;text-align: center;}
+.header-btngroup a:hover{background-color:#F8FDFA; }
+
+
+.sidebar-contrl{position: fixed;top: 50%;left:193px;height: 40px;margin-top: -20px;width:0;background-color: transparent;z-index: 3333;border-top: 12px solid transparent;border-left: 14px solid #34495E;border-bottom: 12px solid transparent; cursor: pointer;}
+.sidebar-contrl:before {content: '';display: inline-block;position: absolute;top: 50%;left: -12px;margin-top: -8px;width: 0;height: 0;border-top: 8px solid transparent;border-bottom: 8px solid transparent;border-right: 8px solid #CCD5D6;}
+.sidebar-contrl:hover:before {border-right: 8px solid #2ECC71;}
+.sidebar-contrl.closed {left:0;}
+.sidebar-contrl.closed:before {content: '';border-right: none;border-left: 8px solid #CCD5D6;}
+.sidebar-contrl.closed:hover:before {border-left: 8px solid #2ECC71;}
+.sidebar-contrl.closed+.sidebar {left: -193px;opacity: 0;}
+.header.enlarge{left: 0;}
+.maincontainer.enlarge{left: 0;}
+
+.user{padding:10px 8px 10px 30px;color: #FFF;background-color:#2ecc71;position: relative;height:50px;}
+.user-avatar{width:50px; height: 50px;overflow: hidden;float: left;}
+.user-nickname{margin-left:55px;font-size:16px;line-height:24px;white-space: nowrap;}
+.user-info{margin-left:55px;font-size:12px;line-height:16px;max-height:32px;overflow: hidden;cursor:default;}
+.user-info a{color: #fff}
+.user-info a:hover{background-color: #24C569;}
+.user-info:hover{background-color: #24C569;}
+.sidebar{position: absolute;top:0;left:0;bottom:0;width:193px;background-color: #34495e;overflow:hidden;}
+.sidemenu{color: #90a0a2;}
+.submenu-menu{cursor: pointer;overflow: hidden;}
+.submenu-menu a{color: #90a0a2;display: block;padding: 18px 0 18px 62px;}
+.submenu-title{font-size: 16px;line-height:24px;vertical-align: top;position: relative;}
+.submenu-menu>.submenu-title:hover {  background-color: #273746;}
+.submenu-menu.active>.submenu-title { background-color: #202d3a;}
+.active>.submenu-title a{color:#FFF;}
+.submenu-menu>.submenu-list{display: none;overflow: hidden;}
+.submenu-menu .submenu-menu>.submenu-title a{font-size: 16px;line-height: 24px;color:#95a5a6;padding: 13px 0 13px 64px;}
+.submenu-menu .submenu-menu>.submenu-title:hover{background-color: #273746;}
+.submenu-menu .submenu-menu.active>.submenu-title{background-color: #273746;}
+.icon_menu{float:left;display: inline-block;width: 24px;height:24px;background: url('../images/icon_menu.png') no-repeat;vertical-align: top;margin:18px 0 0 26px;}
+.icon_menu1{background-position:-8px 0;}
+.active>.submenu-title .icon_menu1{background-position:-8px -35px;}
+.icon_menu2{background-position:-47px 0;}
+.active>.submenu-title .icon_menu2{background-position:-47px -35px;}
+.icon_menu3{background-position:-86px 0;}
+.active>.submenu-title .icon_menu3{background-position:-86px -35px;}
+.icon_menu4{background-position:-126px 0;}
+.active>.submenu-title .icon_menu4{background-position:-126px -35px;}
+.icon_menu5{background-position:-173px 0;}
+.active>.submenu-title .icon_menu5{background-position:-173px -35px;}
+.icon_menu6{background-position:-216px 0;}
+.active>.submenu-title .icon_menu6{background-position:-216px -35px;}
+.icon_menu7{background-position:-259px 0;}
+.active>.submenu-title .icon_menu7{background-position:-259px -35px;}
+.icon_menu8{background-position:-305px 0;}
+.active>.submenu-title .icon_menu8{background-position:-305px -35px;}
+.opened>.submenu-menu{display: none;}
+.opened>.active{display: block;}
+.opened>.active>.submenu-list{display: block;}
+.sidemenu,.opened>.active>.submenu-title{padding-top: 12px;}
+.sidemenu.opened,.submenu-menu.opened{padding-top:0;}
+
+.maincontainer{position: absolute;top:71px;left:193px;right:0;bottom:0;overflow: hidden;}
+

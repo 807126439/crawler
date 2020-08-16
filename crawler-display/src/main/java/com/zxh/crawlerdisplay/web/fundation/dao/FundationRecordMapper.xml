@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxh.crawlerdisplay.web.fundation.dao.IFundationRecordDao">
+
+  <resultMap id="BaseResultMap" type="com.zxh.crawlerdisplay.web.fundation.entity.FundationRecord">
+    
+    		<id column="id" jdbcType="VARCHAR" property="id" />
+    		<result column="code" jdbcType="INTEGER" property="code" />
+    		<result column="date" jdbcType="TIMESTAMP" property="date" />
+    		<result column="net_value" jdbcType="DECIMAL" property="netValue" />
+    		<result column="accumulated_net" jdbcType="DECIMAL" property="accumulatedNet" />
+    		<result column="growth_rate" jdbcType="DECIMAL" property="growthRate" />
+    		<result column="buy_status" jdbcType="INTEGER" property="buyStatus" />
+    		<result column="sell_status" jdbcType="INTEGER" property="sellStatus" />
+    		<result column="distribution" jdbcType="DECIMAL" property="distribution" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+        id,
+        code,
+        date,
+        net_value,
+        accumulated_net,
+        growth_rate,
+        buy_status,
+        sell_status,
+        distribution
+  </sql>
+
+  <select id="getById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from FUNDATION_RECORD
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+
+  
+  <sql id="select_contition" >
+  </sql>
+
+
+	<select id="searchByCode" parameterType="int" resultType="com.zxh.crawlerdisplay.web.fundation.dto.FundationRecordDTO">
+		select
+		date AS date,
+		net_value AS netValue,
+		accumulated_net AS accumulatedNet,
+		growth_rate AS growthRate
+		from FUNDATION_RECORD
+		where code = #{code}
+		ORDER BY date asc
+	</select>
+  
+  
+  <select id="countByCondition" parameterType="com.zxh.crawlerdisplay.web.fundation.dto.FundationRecordDTO" resultType="long">
+    select count(*) from FUNDATION_RECORD 
+	<include refid="select_contition" />
+  </select>
+
+  <select id="selectListByCondition" parameterType="map" resultType="com.zxh.crawlerdisplay.web.fundation.dto.FundationRecordDTO">
+    select 
+        id AS id,
+        code AS code,
+        date AS date,
+        net_value AS netValue,
+        accumulated_net AS accumulatedNet,
+        growth_rate AS growthRate,
+        buy_status AS buyStatus,
+        sell_status AS sellStatus,
+        distribution AS distribution
+    from FUNDATION_RECORD
+	<include refid="select_contition" />
+    <if test="sidx!=null and sord!=null">
+      ORDER BY ${sidx} ${sord} 
+    </if>
+    <if test="startQuery!=null and pageSize!=null">
+      LIMIT #{startQuery},#{pageSize}  
+    </if>
+  </select>
+
+  <select id="getDetailById" parameterType="java.lang.String" resultType="com.zxh.crawlerdisplay.web.fundation.dto.FundationRecordDTO">
+    select 
+        id AS id,
+        code AS code,
+        date AS date,
+        net_value AS netValue,
+        accumulated_net AS accumulatedNet,
+        growth_rate AS growthRate,
+        buy_status AS buyStatus,
+        sell_status AS sellStatus,
+        distribution AS distribution
+    from FUNDATION_RECORD
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String">
+    delete from FUNDATION_RECORD
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.zxh.crawlerdisplay.web.fundation.entity.FundationRecord" useGeneratedKeys="true">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT REPLACE(UUID(),'-','')
+    </selectKey>
+    insert into FUNDATION_RECORD (
+	    	id,
+	    	code,
+	    	date,
+	    	net_value,
+	    	accumulated_net,
+	    	growth_rate,
+	    	buy_status,
+	    	sell_status,
+	    	distribution
+      )
+    values (
+    		#{id,jdbcType=INTEGER},
+    		#{code,jdbcType=INTEGER},
+    		#{date,jdbcType=TIMESTAMP},
+    		#{netValue,jdbcType=DECIMAL},
+    		#{accumulatedNet,jdbcType=DECIMAL},
+    		#{growthRate,jdbcType=DECIMAL},
+    		#{buyStatus,jdbcType=INTEGER},
+    		#{sellStatus,jdbcType=INTEGER},
+    		#{distribution,jdbcType=DECIMAL}
+      )
+  </insert>
+
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.zxh.crawlerdisplay.web.fundation.entity.FundationRecord" useGeneratedKeys="true">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT REPLACE(UUID(),'-','')
+    </selectKey>
+    insert into FUNDATION_RECORD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+	      <if test="id != null">
+	        id,
+	      </if>
+	      <if test="code != null">
+	        code,
+	      </if>
+	      <if test="date != null">
+	        date,
+	      </if>
+	      <if test="netValue != null">
+	        net_value,
+	      </if>
+	      <if test="accumulatedNet != null">
+	        accumulated_net,
+	      </if>
+	      <if test="growthRate != null">
+	        growth_rate,
+	      </if>
+	      <if test="buyStatus != null">
+	        buy_status,
+	      </if>
+	      <if test="sellStatus != null">
+	        sell_status,
+	      </if>
+	      <if test="distribution != null">
+	        distribution,
+	      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+		      <if test="id != null">
+		        #{id,jdbcType=INTEGER},
+		      </if>
+		      <if test="code != null">
+		        #{code,jdbcType=INTEGER},
+		      </if>
+		      <if test="date != null">
+		        #{date,jdbcType=TIMESTAMP},
+		      </if>
+		      <if test="netValue != null">
+		        #{netValue,jdbcType=DECIMAL},
+		      </if>
+		      <if test="accumulatedNet != null">
+		        #{accumulatedNet,jdbcType=DECIMAL},
+		      </if>
+		      <if test="growthRate != null">
+		        #{growthRate,jdbcType=DECIMAL},
+		      </if>
+		      <if test="buyStatus != null">
+		        #{buyStatus,jdbcType=INTEGER},
+		      </if>
+		      <if test="sellStatus != null">
+		        #{sellStatus,jdbcType=INTEGER},
+		      </if>
+		      <if test="distribution != null">
+		        #{distribution,jdbcType=DECIMAL},
+		      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.zxh.crawlerdisplay.web.fundation.entity.FundationRecord">
+    update FUNDATION_RECORD
+    <set>
+		      <if test="code != null">
+		       code = #{code,jdbcType=INTEGER},
+		      </if>
+		      <if test="date != null">
+		       date = #{date,jdbcType=TIMESTAMP},
+		      </if>
+		      <if test="netValue != null">
+		       net_value = #{netValue,jdbcType=DECIMAL},
+		      </if>
+		      <if test="accumulatedNet != null">
+		       accumulated_net = #{accumulatedNet,jdbcType=DECIMAL},
+		      </if>
+		      <if test="growthRate != null">
+		       growth_rate = #{growthRate,jdbcType=DECIMAL},
+		      </if>
+		      <if test="buyStatus != null">
+		       buy_status = #{buyStatus,jdbcType=INTEGER},
+		      </if>
+		      <if test="sellStatus != null">
+		       sell_status = #{sellStatus,jdbcType=INTEGER},
+		      </if>
+		      <if test="distribution != null">
+		       distribution = #{distribution,jdbcType=DECIMAL},
+		      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="update" parameterType="com.zxh.crawlerdisplay.web.fundation.entity.FundationRecord">
+    update FUNDATION_RECORD
+    set 
+		      <if test="code != null">
+		       code = #{code,jdbcType=INTEGER},
+		      </if>
+		      <if test="date != null">
+		       date = #{date,jdbcType=TIMESTAMP},
+		      </if>
+		      <if test="netValue != null">
+		       net_value = #{netValue,jdbcType=DECIMAL},
+		      </if>
+		      <if test="accumulatedNet != null">
+		       accumulated_net = #{accumulatedNet,jdbcType=DECIMAL},
+		      </if>
+		      <if test="growthRate != null">
+		       growth_rate = #{growthRate,jdbcType=DECIMAL},
+		      </if>
+		      <if test="buyStatus != null">
+		       buy_status = #{buyStatus,jdbcType=INTEGER},
+		      </if>
+		      <if test="sellStatus != null">
+		       sell_status = #{sellStatus,jdbcType=INTEGER},
+		      </if>
+		      <if test="distribution != null">
+		       distribution = #{distribution,jdbcType=DECIMAL}
+		      </if>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

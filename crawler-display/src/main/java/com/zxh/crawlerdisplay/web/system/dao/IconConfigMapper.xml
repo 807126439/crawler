@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxh.crawlerdisplay.web.system.dao.IIconConfigDao">
+
+  <resultMap id="BaseResultMap" type="com.zxh.crawlerdisplay.web.system.entity.IconConfig">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="icon_type" jdbcType="SMALLINT" property="iconType" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="base_file_id" jdbcType="BIGINT" property="baseFileId" />
+    <result column="file_view_path" jdbcType="VARCHAR" property="fileViewPath" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, icon_type, file_name, base_file_id, file_view_path, create_by, 
+    update_by, gmt_create, gmt_modified
+  </sql>
+
+  <select id="getById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from c_icon_config
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="countByCondition" parameterType="map" resultType="long">
+    select count(*) FROM c_icon_config
+    <include refid="select_condition" />
+  </select>
+
+  <sql id="select_condition">
+    <where>
+      <if test="id!=null">
+        id=#{id}
+      </if>
+      <if test="iconType!=null">
+        AND icon_type=#{iconType}
+      </if>
+      <if test="fileName!=null">
+        AND file_name=#{fileName}
+      </if>
+      <if test="baseFileId!=null">
+        AND base_file_id=#{baseFileId}
+      </if>
+      <if test="fileViewPath!=null">
+        AND file_view_path=#{fileViewPath}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectListByCondition" parameterType="map" resultType="com.zxh.crawlerdisplay.web.system.dto.iconConfig.IconConfigDTO">
+       select
+             id AS id,
+             icon_type AS iconType,
+             file_name AS fileName,
+             base_file_id AS baseFileId,
+             file_view_path AS fileViewPath,
+             create_by AS createBy,
+             update_by AS updateBy,
+             gmt_create AS gmtCreate,
+             gmt_modified AS gmtModified
+         FROM c_icon_config
+         <include refid="select_condition" />
+	  <if test="sidx!=null and sord!=null">
+	      ORDER BY ${sidx} ${sord}
+	  </if>
+	  <if test="startQuery!=null and pageSize!=null">
+	      LIMIT #{startQuery},#{pageSize}  
+	  </if>
+  </select>
+
+  <select id="getDetailById" parameterType="java.lang.String" resultType="com.zxh.crawlerdisplay.web.system.dto.iconConfig.IconConfigDTO">
+    select 
+      id AS id,
+      icon_type AS iconType,
+      file_name AS fileName,
+      base_file_id AS baseFileId,
+      file_view_path AS fileViewPath,
+      create_by AS createBy,
+      update_by AS updateBy,
+      gmt_create AS gmtCreate,
+      gmt_modified AS gmtModified
+    from c_icon_config
+
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String">
+    delete from c_icon_config
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.zxh.crawlerdisplay.web.system.entity.IconConfig">
+     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT REPLACE(UUID(),'-','')
+    </selectKey>
+    insert into c_icon_config (id, icon_type, file_name, 
+      base_file_id, file_view_path,create_by, update_by, gmt_create, gmt_modified
+      )
+    values (#{id,jdbcType=VARCHAR}, #{iconType,jdbcType=SMALLINT}, #{fileName,jdbcType=VARCHAR}, 
+      #{baseFileId,jdbcType=DECIMAL}, #{fileViewPath,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.zxh.crawlerdisplay.web.system.entity.IconConfig">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      select lower(sys_guid()) from dual
+    </selectKey>
+    insert into c_icon_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      ID,
+       <if test="iconType != null">
+        icon_type,
+      </if>
+      <if test="fileName != null">
+        file_name,
+      </if>
+      <if test="baseFileId != null">
+        base_file_id,
+      </if>
+      <if test="fileViewPath != null">
+        file_view_path,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=VARCHAR},
+      <if test="iconType != null">
+        #{iconType,jdbcType=SMALLINT},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="baseFileId != null">
+        #{baseFileId,jdbcType=BIGINT},
+      </if>
+      <if test="fileViewPath != null">
+        #{fileViewPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="com.zxh.crawlerdisplay.web.system.entity.IconConfig">
+    update c_icon_config
+    <set>
+      <if test="iconType != null">
+        icon_type = #{iconType,jdbcType=SMALLINT},
+      </if>
+      <if test="fileName != null">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="baseFileId != null">
+        base_file_id = #{baseFileId,jdbcType=DECIMAL},
+      </if>
+      <if test="fileViewPath != null">
+        file_view_path = #{fileViewPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="update" parameterType="com.zxh.crawlerdisplay.web.system.entity.IconConfig">
+    update c_icon_config
+    set 
+      type = #{type,jdbcType=SMALLINT},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      base_file_id = #{baseFileId,jdbcType=BIGINT},
+      file_view_path = #{fileViewPath,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+</mapper>

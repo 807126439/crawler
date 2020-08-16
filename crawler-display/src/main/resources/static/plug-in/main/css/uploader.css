@@ -1,0 +1,28 @@
+.webuploader-container {position: relative;}
+.webuploader-element-invisible {position: absolute !important;clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);}
+.webuploader-pick {position: relative;display: inline-block;cursor: pointer;background: #F3F3F3;padding: 4px 10px;text-align: center;overflow: hidden;color:#3097d2;border:1px solid #3097d2;line-height: 22px;}
+/*.webuploader-pick-hover {background: #00a2d4;color: #FFF;}*/
+.webuploader-pick-disable {opacity: 0.6;pointer-events:none;}
+
+.uploader .btns{text-align: left;}
+.picker{display: inline-block;}
+.ctlBtn{font-size:14px;display: inline-block;padding:4px 10px;background: #3097d2;padding: 4px 10px;text-align: center;overflow: hidden;color:#FFF;border:1px solid #3097d2;vertical-align: top;line-height: 22px;}
+.uploader .ctlBtn:hover{color:#FFF }
+/*#ctlBtn:hover{background: #00a2d4;color: #FFF;}*/
+.attachmentlist{line-height: 32px;text-align: left;}
+.attachmentlist span:first-child:last-child{display: none;}
+.attachmentlist .attachment{display: inline-block;background: #EEE;text-align: center;overflow: hidden;color:#333;border:1px solid #BBB;vertical-align: top;line-height: 30px;margin-bottom: 4px;cursor: pointer;position: relative;min-width: 120px;}
+.attachmentlist .attachment:hover{border-color:#3097d2;}
+.attachmentlist .ctrls{display: table;width: 100%;position: absolute;top:-33px;-webkit-transition: top 0.6s;-o-transition: top 0.6s;transition: top 0.6s;}
+.attachmentlist .attachment:hover .ctrls{top:0;}
+.attachmentlist .ctrls a{display: table-cell;line-height: 32px;overflow: hidden;color: #333;background: #aadbf7;text-align: center;box-sizing: border-box;-webkit-transition: background-color 0.6s;-o-transition: background-color 0.6s;transition: background-color 0.6s;}
+.attachmentlist .ctrls a:hover{background-color:#e8f7ff }
+.attachmentlist .ctrls a+a{border-left: 1px solid #3097d2;}
+
+
+.uploader-list{text-align: left;}
+.uploader-list .item{margin:5px 0;}
+.uploader-list .retry{margin-left:4px;color:#3097d2;}
+.uploader-list .remove{margin-left:4px;color:#f44336;}
+.progress{border:1px solid #c3d3dc; }
